@@ -1,0 +1,23 @@
+<div class = "comment_block">
+  <div class = "name">
+    <%= link_to tweet.user.username, user_path(tweet.user.username) %>
+  </div>
+  <div class="commentator">
+    <% tweet.post.content.gsub!(/#\w+/) { |hashtag| link_to hashtag, hash_tags_posts_path(hash_tag: hashtag) } %>
+    <%= simple_format(tweet.post.content)%>
+    <div class="commentator_name">
+      <%= tweet.created_at.to_s(:short) %><br>
+      <%if tweet.retweeted %>
+        Shared from: <%= link_to tweet.retweeted_from_user.username, user_path(tweet.retweeted_from_user.username) %> 
+      <% end %>
+    </div>
+  </div> 
+  <div class="retweet"> 
+    <% if ( current_user.present? && !tweet.creator?(current_user) && !tweet.user.profile_privacy) %> 
+      <%= button_to "Retweet", retweet_path(id: tweet) %>
+    <% end %>
+  </div>
+  <div class ="shared_user">
+    
+  </div>
+</div>

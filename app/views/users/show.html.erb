@@ -1,0 +1,16 @@
+
+<div>
+  <%= render partial: 'users/user_info', locals: { user: @user } %>
+  <div>
+    <% if(current_user.id == @user.id) %>
+      <%= render template: 'posts/_form', locals: { :@post => @post } %>
+    <% end %>
+    <% if @user.tweets.present? %>
+      <div class ="comment_panel">
+        <div class="posts">Posts </div>
+          <%= render @user.tweets.eager_loading_associations %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>

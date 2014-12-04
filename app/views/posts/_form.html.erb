@@ -1,0 +1,10 @@
+<div class="post_creation">
+  <%= form_for @post do |f| %>
+    <div class="create_post">
+      <%= f.text_area :content,  :cols => 80, :rows => 5, placeholder: 'Whats on your mind? ...'%>
+    </div> 
+    <div class="post">
+      <%= f.submit 'Post'%>
+    </div>
+  <% end %>
+</div>
